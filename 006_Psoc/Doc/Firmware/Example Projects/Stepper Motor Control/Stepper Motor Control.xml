@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Stepper Motor Control" WorkspaceName="Stepper Motor Control.cywrk">
+  <Version>1.0</Version>
+  <Keyword>Motor Control</Keyword>
+  <Keyword>Sequencing SAR ADC</Keyword>
+  <Keyword>PWM (TCPWM mode)</Keyword>
+  <Keyword>Opamp</Keyword>
+  <Keyword>Current DAC</Keyword>
+  <Keyword>UART (SCB mode)</Keyword>
+  <Keyword>Lookup Table</Keyword>
+  <Keyword Hidden="true">CY8CKIT-037</Keyword>
+  <Description>This code example demonstrates controlling the stepper motor. The stepper motor is controlled with microstep from hardware and firmware.</Description>
+  <DeviceFilter>PSoC 4200</DeviceFilter>
+  <MinToolVersion>4.2</MinToolVersion>
+</Project>

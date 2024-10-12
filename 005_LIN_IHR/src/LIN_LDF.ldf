@@ -1,0 +1,105 @@
+/****************************************************************************
+**        File        : LIN_LDF.ldf
+**        Description : LIN Description file for the defined LIN cluster
+*****************************************************************************/
+
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed = 19.2 kbps;
+Channel_name = "LIN_Configuration1";
+
+Nodes {
+    Master: LINMaster, 5 ms, 0.1 ms;
+    Slaves: Motor;
+}
+
+Signals {
+    RefSpeed: 16,0,LINMaster,Motor;
+    ActSpeed: 16,0,Motor,LINMaster;
+    Error: 1,0,Motor,LINMaster;
+}
+
+Diagnostic_signals {
+    MasterReqB0:8,0;
+    MasterReqB1:8,0;
+    MasterReqB2:8,0;
+    MasterReqB3:8,0;
+    MasterReqB4:8,0;
+    MasterReqB5:8,0;
+    MasterReqB6:8,0;
+    MasterReqB7:8,0;
+    SlaveRespB0:8,0;
+    SlaveRespB1:8,0;
+    SlaveRespB2:8,0;
+    SlaveRespB3:8,0;
+    SlaveRespB4:8,0;
+    SlaveRespB5:8,0;
+    SlaveRespB6:8,0;
+    SlaveRespB7:8,0;
+}
+
+Frames {
+    MotorCtrl:17,LINMaster,8{
+        RefSpeed,0;
+    }
+    MotorStatus:18,Motor,8{
+        ActSpeed,0;
+        Error,16;
+    }
+}
+
+Sporadic_frames {
+}
+
+Event_triggered_frames {
+}
+
+Diagnostic_frames {
+MasterReq: 60{
+    MasterReqB0,0;
+    MasterReqB1,8;
+    MasterReqB2,16;
+    MasterReqB3,24;
+    MasterReqB4,32;
+    MasterReqB5,40;
+    MasterReqB6,48;
+    MasterReqB7,56;
+    }
+SlaveResp: 61{
+    SlaveRespB0,0;
+    SlaveRespB1,8;
+    SlaveRespB2,16;
+    SlaveRespB3,24;
+    SlaveRespB4,32;
+    SlaveRespB5,40;
+    SlaveRespB6,48;
+    SlaveRespB7,56;
+    }
+}
+
+Node_attributes {
+    Motor {
+        LIN_protocol = 2.1;
+        configured_NAD = 1;
+        initial_NAD = 1;
+        product_id = 4660,22136,0;
+        response_error = Error;
+        /*fault_state_signals: not configured in GUI*/
+        P2_min = 50 ms;
+        ST_min = 0 ms;
+        N_As_timeout = 1000 ms;
+        N_Cr_timeout = 1000 ms;
+        configurable_frames {
+                 MotorCtrl;
+                 MotorStatus;
+        }
+    }
+}
+
+Schedule_tables {
+    Run {
+        MotorCtrl delay 100 ms;
+        MotorStatus delay 100 ms;
+    }
+}

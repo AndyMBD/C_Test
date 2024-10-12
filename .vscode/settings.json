@@ -1,0 +1,37 @@
+{
+    "editor.renderLineHighlight": "gutter",
+    "cmake.options.statusBarVisibility": "visible",
+    "workbench.colorCustomizations": {
+                    "editor.lineHighlightBackground": "#0400fffa",//修改光标所在行的背景色
+                    "editor.lineHighlightBorder": "#0400fffa",     //修改光标所在行的边框色
+                    "editor.selectionBackground": "#74e60a48",
+                    // "editor.selectionForeground": "#ff0000",
+                    "editorLineNumber.activeForeground": "#ff0000",
+                    "editorLineNumber.foreground": "#ffffff",
+                    // "editorGutter.background": "#ff0000"
+                    // "editor.LineNumberForeground": "#17a346"
+                                    },
+                                    "iis.configDir": "",
+    // "highlightwords.defaultMode": 0,
+    // "highlightwords.colors": [
+    //                         { "light": "#b3d9ff", "dark": "cyan" },
+    //                         { "light": "#e6ffb3", "dark": "pink" },
+    //                         { "light": "#b3b3ff", "dark": "lightgreen" },
+    //                         { "light": "#ffd9b3", "dark": "magenta" },
+    //                         { "light": "#ffb3ff", "dark": "cornflowerblue" },
+    //                         { "light": "#b3ffb3", "dark": "orange" },
+    //                         { "light": "#ffff80", "dark": "green" },
+    //                         { "light": "#d1e0e0", "dark": "red" }                                        
+    //                         ],
+    // "highlightwords.box": {
+    //     "light": false,
+    //     "dark": true
+    // },
+    // "highlightwords.defaultMode": {
+    //     "default": 0
+    // },
+
+    // "highlightwords.showSidebar": {
+    //     "default": true
+    // }
+}

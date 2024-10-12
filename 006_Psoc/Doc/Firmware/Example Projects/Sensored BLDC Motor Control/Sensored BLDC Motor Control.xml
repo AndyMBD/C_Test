@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Sensored BLDC Motor Control" WorkspaceName="Sensored BLDC Motor Control.cywrk">
+  <Version>1.0</Version>
+  <Keyword>Motor Control</Keyword>
+  <Keyword>Current DAC</Keyword>
+  <Keyword>Sequencing SAR ADC</Keyword>
+  <Keyword>PWM (TCPWM mode)</Keyword>
+  <Keyword>Low Power Comparator</Keyword>
+  <Keyword>UART (SCB mode)</Keyword>
+  <Keyword>Lookup Table</Keyword>
+  <Keyword Hidden="true">CY8CKIT-037</Keyword>
+  <Description>This code example demonstrates controlling the BLDC motor. The Hall sensor is used to detect the speed and rotor position.</Description>
+  <DeviceFilter>PSoC 4200</DeviceFilter>
+  <MinToolVersion>4.2</MinToolVersion>
+</Project>
