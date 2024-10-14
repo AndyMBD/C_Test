@@ -7,3 +7,5 @@
 006_Psoc/build
 
 006_Psoc/Doc/Firmware/Hex Files/
+007_iqmath/build
+007_iqmath/iq_math/lib/
