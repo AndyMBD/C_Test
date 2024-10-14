@@ -47,5 +47,5 @@
     // #error MUST DEFINE MULTIPLIER SUPPORT METHOD (__RTS_SUPPORT__, __IQMPYSW__, __IQMPY32_4XX__, __IQMPY32_5XX__).
     #include "RTS_support.h"
 //#endif
-
+#define __STATIC_INLINE         static inline
 #endif //__SUPPORTH__
