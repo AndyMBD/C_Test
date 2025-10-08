@@ -83,7 +83,7 @@ googlemock/gtest
 /RUN_TESTS.vcxproj
 /INSTALL.vcxproj.filters
 /INSTALL.vcxproj
-/googletest-distribution.sln
+/googletest_Sample.sln
 /CMakeCache.txt
 /ALL_BUILD.vcxproj.filters
 /ALL_BUILD.vcxproj
