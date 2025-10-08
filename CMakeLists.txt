@@ -15,24 +15,8 @@ include(CMakeDependentOption)
 include(GNUInstallDirs)
 # Note that googlemock target already builds googletest.
 option(BUILD_GMOCK "Builds the googlemock subproject" OFF)
-option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" ON)
+option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" OFF)
 option(GTEST_HAS_ABSL "Use Abseil and RE2. Requires Abseil and RE2 to be separately added to the build." OFF)
-
-if(GTEST_HAS_ABSL)
-  if(NOT TARGET absl::base)
-    find_package(absl REQUIRED)
-  endif()
-  if(NOT TARGET re2::re2)
-    find_package(re2 REQUIRED)
-  endif()
-endif()
-
-if(BUILD_GMOCK)
-  add_subdirectory( googlemock )
-else()
-  add_subdirectory( googletest )
-endif()
-
 
 find_package(GSL REQUIRED)
 message(STATUS "GSL found: ${GSL_FOUND}")
@@ -45,6 +29,25 @@ message(STATUS "GTEST_INCLUDE_DIRS: ${GTEST_INCLUDE_DIRS}")
 message(STATUS "GTEST_LIBRARIES:    ${GTEST_BOTH_LIBRARIES}")
 message(STATUS "CMAKE_C_COMPILER:    ${CMAKE_C_COMPILER}")
 message(STATUS "CMAKE_CXX_COMPILER:    ${CMAKE_CXX_COMPILER}")
+
+if(GTEST_HAS_ABSL)
+  if(NOT TARGET absl::base)
+    find_package(absl REQUIRED)
+  endif()
+  if(NOT TARGET re2::re2)
+    find_package(re2 REQUIRED)
+  endif()
+endif()
+
+if(BUILD_GMOCK)
+  add_subdirectory( googlemock )
+  message(STATUS "googlemock added")
+else()
+  add_subdirectory( googletest )
+  message(STATUS "googletest added")
+endif()
+
+
 
 # gcov相关编译选项
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
