@@ -107,17 +107,17 @@ set(cmake_package_name GTest CACHE INTERNAL "")
 # endif()
 
 # Where Google Test's .h files can be found.
-# set(gtest_build_include_dirs
-#   "${gtest_SOURCE_DIR}/include"
-#   "${gtest_SOURCE_DIR}/samples"
-#   "${gtest_SOURCE_DIR}")
+set(gtest_build_include_dirs
+  "${gtest_SOURCE_DIR}/include"
+  "${gtest_SOURCE_DIR}/samples"
+  "${gtest_SOURCE_DIR}")
 # include_directories(${gtest_build_include_dirs})
 # message(STATUS "gtest_SOURCE_DIR: ${gtest_SOURCE_DIR}")
 # message(STATUS "gtest_build_include_dirs: ${gtest_build_include_dirs}")
 # add_library(gtest_main STATIC src/gtest_main.cc)
 
 # include(Dart)
-
+enable_testing()
 # add_executable(RunTests ${gtest_SOURCE_DIR}/samples/sample1_unittest.cc)
 add_executable(sample1_unittest 
               # ${gtest_SOURCE_DIR}/samples/gtest_main.cc
@@ -131,9 +131,52 @@ add_executable(sample2_unittest
               # ${gtest_SOURCE_DIR}/samples/gtest_main.cc
               ${gtest_SOURCE_DIR}/samples/sample2.cc
               ${gtest_SOURCE_DIR}/samples/sample2_unittest.cc)
-              
+target_include_directories(sample2_unittest PRIVATE ${gtest_build_include_dirs})
 target_link_libraries(sample2_unittest gtest gtest_main)
 add_test(NAME sample2_unittest COMMAND sample2_unittest)
+
+add_executable(sample3_unittest 
+              ${gtest_SOURCE_DIR}/samples/sample3_unittest.cc)
+target_include_directories(sample3_unittest PRIVATE ${gtest_build_include_dirs})
+target_link_libraries(sample3_unittest gtest gtest_main)
+add_test(NAME sample3_unittest COMMAND sample3_unittest)
+
+add_executable(sample4_unittest 
+              # ${gtest_SOURCE_DIR}/samples/gtest_main.cc
+              ${gtest_SOURCE_DIR}/samples/sample4.cc
+              ${gtest_SOURCE_DIR}/samples/sample4_unittest.cc)
+target_include_directories(sample4_unittest PRIVATE ${gtest_build_include_dirs})
+target_link_libraries(sample4_unittest gtest gtest_main)
+add_test(NAME sample4_unittest COMMAND sample4_unittest)
+
+# add_executable(sample5_unittest
+#               ${gtest_SOURCE_DIR}/samples/sample1.h
+#               ${gtest_SOURCE_DIR}/samples/sample3-inl.h
+#               ${gtest_SOURCE_DIR}/samples/sample5_unittest.cc)
+# target_include_directories(sample4_unittest PRIVATE ${gtest_build_include_dirs})
+# target_link_libraries(sample5_unittest gtest gtest_main)
+# add_test(NAME sample5_unittest COMMAND sample5_unittest)
+
+add_executable(sample6_unittest
+              ${gtest_SOURCE_DIR}/samples/sample6_unittest.cc)
+target_link_libraries(sample6_unittest gtest gtest_main)
+add_test(NAME sample6_unittest COMMAND sample6_unittest)
+
+add_executable(sample7_unittest
+              ${gtest_SOURCE_DIR}/samples/sample7_unittest.cc)
+target_link_libraries(sample7_unittest gtest gtest_main)
+add_test(NAME sample7_unittest COMMAND sample7_unittest)
+
+add_executable(sample8_unittest
+              ${gtest_SOURCE_DIR}/samples/sample8_unittest.cc)
+target_link_libraries(sample8_unittest gtest gtest_main)
+add_test(NAME sample8_unittest COMMAND sample8_unittest)
+
+add_executable(sample9_unittest
+              ${gtest_SOURCE_DIR}/samples/sample9_unittest.cc)
+target_link_libraries(sample9_unittest gtest gtest_main)
+add_test(NAME sample9_unittest COMMAND sample9_unittest)
+
 # cxx_test(googletest-death-test-test gtest_main)
 # target_include_directories(RunTests PRIVATE
 #                        "${gtest_SOURCE_DIR}/include"
@@ -224,7 +267,7 @@ add_test(NAME sample2_unittest COMMAND sample2_unittest)
 # if (gtest_build_tests)
 #   # This must be set in the root directory for the tests to be run by
 #   # 'make test' or ctest.
-#   enable_testing()
+  
 
 #   ############################################################
 #   # C++ tests built with standard compiler flags.

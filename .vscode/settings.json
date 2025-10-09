@@ -12,6 +12,12 @@
                     // "editor.LineNumberForeground": "#17a346"
                                     },
                                     "iis.configDir": "",
+                                    "cmake.configureOnEdit": false,
+                                    "cmake.configureOnOpen": false,
+    "terminal.integrated.allowColor": true,
+    "terminal.integrated.env.windows": {
+    "FORCE_COLOR": "1"
+    }
     // "highlightwords.defaultMode": 0,
     // "highlightwords.colors": [
     //                         { "light": "#b3d9ff", "dark": "cyan" },

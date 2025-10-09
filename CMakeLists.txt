@@ -41,7 +41,7 @@ else()
   add_subdirectory( googletest )
   message(STATUS "googletest added")
 endif()
-
+enable_testing()
 
 
 # gcov相关编译选项
