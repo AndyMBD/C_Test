@@ -6,11 +6,6 @@ cmake_minimum_required(VERSION 3.16)
 project(googletest_Sample)
 set(GOOGLETEST_VERSION 1.16.0)
 
-if(NOT CYGWIN AND NOT MSYS AND NOT ${CMAKE_SYSTEM_NAME} STREQUAL QNX)
-  set(CMAKE_CXX_EXTENSIONS OFF)
-endif()
-enable_testing()
-
 include(CMakeDependentOption)
 include(GNUInstallDirs)
 # Note that googlemock target already builds googletest.
@@ -50,8 +45,8 @@ endif()
 
 
 # gcov相关编译选项
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+# SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
 
 # SET(GCC_COVERAGE_COMPILE_FLAGS "-g -O0 -coverage -fprofile-arcs -ftest-coverage")
 # SET(GCC_COVERAGE_LINK_FLAGS "-coverage -lgcov")

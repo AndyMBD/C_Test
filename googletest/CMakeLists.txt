@@ -29,9 +29,9 @@ option(
 # Defines pre_project_set_up_hermetic_build() and set_up_hermetic_build().
 # include(cmake/hermetic_build.cmake OPTIONAL)
 
-if (COMMAND pre_project_set_up_hermetic_build)
-  pre_project_set_up_hermetic_build()
-endif()
+# if (COMMAND pre_project_set_up_hermetic_build)
+#   pre_project_set_up_hermetic_build()
+# endif()
 
 ########################################################################
 #
@@ -49,33 +49,33 @@ endif()
 cmake_minimum_required(VERSION 3.13)
 project(gtest VERSION ${GOOGLETEST_VERSION} LANGUAGES CXX C)
 
-if (COMMAND set_up_hermetic_build)
-  set_up_hermetic_build()
-endif()
+# if (COMMAND set_up_hermetic_build)
+#   set_up_hermetic_build()
+# endif()
 
 # These commands only run if this is the main project.
-if(CMAKE_PROJECT_NAME STREQUAL "gtest" OR CMAKE_PROJECT_NAME STREQUAL "googletest_Sample")
+# if(CMAKE_PROJECT_NAME STREQUAL "gtest" OR CMAKE_PROJECT_NAME STREQUAL "googletest_Sample")
 
-  # BUILD_SHARED_LIBS is a standard CMake variable, but we declare it here to
-  # make it prominent in the GUI.
-  option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+#   # BUILD_SHARED_LIBS is a standard CMake variable, but we declare it here to
+#   # make it prominent in the GUI.
+#   option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
 
-else()
+# else()
 
-  mark_as_advanced(
-    gtest_force_shared_crt
-    gtest_build_tests
-    gtest_build_samples
-    gtest_disable_pthreads
-    gtest_hide_internal_symbols)
+#   mark_as_advanced(
+#     gtest_force_shared_crt
+#     gtest_build_tests
+#     gtest_build_samples
+#     gtest_disable_pthreads
+#     gtest_hide_internal_symbols)
 
-endif()
+# endif()
 
 
-if (gtest_hide_internal_symbols)
-  set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-  set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-endif()
+# if (gtest_hide_internal_symbols)
+#   set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+#   set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+# endif()
 
 # Define helper functions and macros used by Google Test.
 # include(cmake/internal_utils.cmake)
@@ -107,29 +107,43 @@ set(cmake_package_name GTest CACHE INTERNAL "")
 # endif()
 
 # Where Google Test's .h files can be found.
-set(gtest_build_include_dirs
-  "${gtest_SOURCE_DIR}/include"
-  "${gtest_SOURCE_DIR}/samples"
-  "${gtest_SOURCE_DIR}")
-include_directories(${gtest_build_include_dirs})
-message(STATUS "gtest_SOURCE_DIR: ${gtest_SOURCE_DIR}")
-message(STATUS "gtest_build_include_dirs: ${gtest_build_include_dirs}")
+# set(gtest_build_include_dirs
+#   "${gtest_SOURCE_DIR}/include"
+#   "${gtest_SOURCE_DIR}/samples"
+#   "${gtest_SOURCE_DIR}")
+# include_directories(${gtest_build_include_dirs})
+# message(STATUS "gtest_SOURCE_DIR: ${gtest_SOURCE_DIR}")
+# message(STATUS "gtest_build_include_dirs: ${gtest_build_include_dirs}")
 # add_library(gtest_main STATIC src/gtest_main.cc)
 
-include(CTest)
+# include(Dart)
+
 # add_executable(RunTests ${gtest_SOURCE_DIR}/samples/sample1_unittest.cc)
-add_executable(RunTests 
-              ${gtest_SOURCE_DIR}/samples/gtest_main.cc
+add_executable(sample1_unittest 
+              # ${gtest_SOURCE_DIR}/samples/gtest_main.cc
               ${gtest_SOURCE_DIR}/samples/sample1.cc
               ${gtest_SOURCE_DIR}/samples/sample1_unittest.cc)
+              
+target_link_libraries(sample1_unittest gtest gtest_main)
+add_test(NAME sample1_unittest COMMAND sample1_unittest)
 
+add_executable(sample2_unittest 
+              # ${gtest_SOURCE_DIR}/samples/gtest_main.cc
+              ${gtest_SOURCE_DIR}/samples/sample2.cc
+              ${gtest_SOURCE_DIR}/samples/sample2_unittest.cc)
+              
+target_link_libraries(sample2_unittest gtest gtest_main)
+add_test(NAME sample2_unittest COMMAND sample2_unittest)
+# cxx_test(googletest-death-test-test gtest_main)
+# target_include_directories(RunTests PRIVATE
+#                        "${gtest_SOURCE_DIR}/include"
+#                         "${gtest_SOURCE_DIR}/samples"
+#                         "${gtest_SOURCE_DIR}")
+# Add coverage flags (for GCC or Clang)
+# target_compile_options(RunTests PRIVATE -coverage)
+# target_link_options(RunTests PRIVATE -coverage)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-target_include_directories(RunTests PRIVATE
-                       "${gtest_SOURCE_DIR}/include"
-                        "${gtest_SOURCE_DIR}/samples"
-                        "${gtest_SOURCE_DIR}")
-target_link_libraries(RunTests gtest_main gtest)
-add_test(NAME RunTests COMMAND RunTests)
 ########################################################################
 #
 # Defines the gtest & gtest_main libraries. User tests should link
