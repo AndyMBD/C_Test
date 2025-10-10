@@ -24,7 +24,11 @@
 #define SVM_TABLE_H
 
 #include <stdint.h>
-#include "compiler_abstraction.h"
+// #include "compiler_abstraction.h"
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
 
 /** Number of steps for one electrical rotation : a complete sine */
 #if defined(HAS_192PTS_SVM_M_TABLE) || defined(HAS_192PTS_SVM_LH_TABLE)
@@ -105,7 +109,9 @@ int16_t SVM_Table_getValue(uint16_t index);
  *
  * @return The space vector modulations samples at given index and offsets.
  */
-STATIC INLINE svm_vector_t SVM_Table_getDirectValue(uint16_t index,
+
+// STATIC INLINE
+inline svm_vector_t SVM_Table_getDirectValue(uint16_t index,
                                                     uint16_t o1,
                                                     uint16_t o2,
                                                     uint16_t o3,
@@ -114,6 +120,12 @@ STATIC INLINE svm_vector_t SVM_Table_getDirectValue(uint16_t index,
 #ifndef UNITTEST
 #include "lib_svm_table_inline_impl.h"
 #endif /* UNITTEST */
+
+#ifdef __cplusplus
+}
+#endif
+// #endif
+
 
 #endif
 /*/ @} */

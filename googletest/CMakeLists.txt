@@ -110,6 +110,9 @@ set(cmake_package_name GTest CACHE INTERNAL "")
 set(gtest_build_include_dirs
   "${gtest_SOURCE_DIR}/include"
   "${gtest_SOURCE_DIR}/samples"
+  "${gtest_SOURCE_DIR}/svm_table"
+  "${gtest_SOURCE_DIR}/svm_table/src"
+  "${gtest_SOURCE_DIR}/svm_table/unit_test"
   "${gtest_SOURCE_DIR}")
 # include_directories(${gtest_build_include_dirs})
 # message(STATUS "gtest_SOURCE_DIR: ${gtest_SOURCE_DIR}")
@@ -176,6 +179,16 @@ add_executable(sample9_unittest
               ${gtest_SOURCE_DIR}/samples/sample9_unittest.cc)
 target_link_libraries(sample9_unittest gtest gtest_main)
 add_test(NAME sample9_unittest COMMAND sample9_unittest)
+
+add_executable(utest_svm_table
+              ${gtest_SOURCE_DIR}/svm_table/src/lib_svm_table_inline_impl.h
+              ${gtest_SOURCE_DIR}/svm_table/src/lib_svm_table.c
+              ${gtest_SOURCE_DIR}/svm_table/src/lib_svm_table.h
+              ${gtest_SOURCE_DIR}/svm_table/unit_test/utest_lib_svm_table.cc)
+target_include_directories(utest_svm_table PRIVATE ${gtest_build_include_dirs})
+target_link_libraries(utest_svm_table gtest gtest_main)
+add_test(NAME utest_svm_table COMMAND utest_svm_table)
+
 
 # cxx_test(googletest-death-test-test gtest_main)
 # target_include_directories(RunTests PRIVATE

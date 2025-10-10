@@ -23,8 +23,8 @@
 
 #ifndef LIB_SVM_TABLE_INLINE_IMPL_H
 #define LIB_SVM_TABLE_INLINE_IMPL_H
-
-STATIC INLINE svm_vector_t SVM_Table_getDirectValue(uint16_t index,
+// STATIC INLINE 
+inline svm_vector_t SVM_Table_getDirectValue(uint16_t index,
                                                     uint16_t o1,
                                                     uint16_t o2,
                                                     uint16_t o3,

@@ -21,7 +21,7 @@
  * @{
  */
 
-#include "static_assert.h"
+// #include "static_assert.h"
 #include "lib_svm_table.h"
 
 /** SVM table
