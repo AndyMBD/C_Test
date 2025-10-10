@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.16)
 project(googletest_Sample)
 set(GOOGLETEST_VERSION 1.16.0)
 
+include(CTest)
 include(CMakeDependentOption)
 include(GNUInstallDirs)
 # Note that googlemock target already builds googletest.
@@ -45,12 +46,11 @@ enable_testing()
 
 
 # gcov相关编译选项
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-# SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 
 # SET(GCC_COVERAGE_COMPILE_FLAGS "-g -O0 -coverage -fprofile-arcs -ftest-coverage")
 # SET(GCC_COVERAGE_LINK_FLAGS "-coverage -lgcov")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
-
-
