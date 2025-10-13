@@ -144,3 +144,27 @@ class VTK_PARALLEL_EXPORT vtkCompositer: public vtkObject
    ctest -V
    ctest -T coverage
 ```
+
+# git clone this repository
+with vscode cmake configure and build
+```
+cd build
+# build cmake projects
+cmake ..             # Generate native build scripts for GoogleTest.
+# cmake clean with ninja
+ninja clean
+# cmake build with ninja
+ninja all
+#cTest with ninja
+ninja test
+ctest -V
+#cTest coverage with ninja
+ninja coverage
+ctest -T coverage
+#coverage report with ninja
+ninja coverage_report
+```
+## vscode Testing
+in vscode, you can use the `Testing` extension to run the tests.
+after run the tests, you can use the `Testing` extension to view the test results.
+ctrl+;+ctrl+o

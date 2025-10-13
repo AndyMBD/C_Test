@@ -24,26 +24,7 @@ another project.
 When building GoogleTest as a standalone project, the typical workflow starts
 with
 
-```
-git clone https://github.com/google/googletest.git -b v1.16.0
-cd googletest        # Main directory of the cloned repository.
-mkdir build          # Create a directory to hold the build output.
-cd build
-# build cmake projects
-cmake ..             # Generate native build scripts for GoogleTest.
-# cmake clean with ninja
-ninja clean
-# cmake build with ninja
-ninja all
-#cTest with ninja
-ninja test
-ctest -V
-#cTest coverage with ninja
-ninja coverage
-ctest -T coverage
-#coverage report with ninja
-ninja coverage_report
-```
+
 
 The above command also includes GoogleMock by default. And so, if you want to
 build only GoogleTest, you should replace the last command with

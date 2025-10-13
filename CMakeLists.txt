@@ -1,6 +1,3 @@
-# Note: CMake support is community-based. The maintainers do not use CMake
-# internally.
-
 cmake_minimum_required(VERSION 3.16)
 
 project(googletest_Sample)
@@ -13,6 +10,7 @@ include(GNUInstallDirs)
 option(BUILD_GMOCK "Builds the googlemock subproject" OFF)
 option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" OFF)
 option(GTEST_HAS_ABSL "Use Abseil and RE2. Requires Abseil and RE2 to be separately added to the build." OFF)
+option(GCOVR_OPTION "Use shared (DLL) run-time lib even when Google Test is built as static lib." ON)
 
 find_package(GSL REQUIRED)
 message(STATUS "GSL found: ${GSL_FOUND}")
@@ -45,24 +43,15 @@ endif()
 enable_testing()
 
 
-# gcov相关编译选项
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-
-
-# 添加代码覆盖率目标
-find_program(GCOVR gcovr REQUIRED)
-message (STATUS "GCOVR found: ${GCOVR}")
-# set(GCOVR_COMMAND ${GCOVR_EXECUTABLE})
-# message (STATUS "GCOVR_COMMAND: ${GCOVR_COMMAND}")
-if (GCOVR)
-    execute_process(
-        COMMAND ${CMAKE_COMMAND} -E echo "Cleaning *.gcno/*.gcda files"
-        COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcda' -delete
-        COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcno' -delete
-    )
-    message(STATUS "${GCOVR}")
+if (GCOVR_OPTION)
+    find_program(GCOVR gcovr REQUIRED)
+    message (STATUS "GCOVR found: ${GCOVR}")
+    # gcov compile options
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+    
+    # message(STATUS "${GCOVR}")
     # same function as ctest -T coverage
     # ninja coverage
     add_custom_target(coverage
@@ -73,7 +62,7 @@ if (GCOVR)
     add_custom_target(coverage_report
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_reports
     COMMAND ${GCOVR} --root ${CMAKE_SOURCE_DIR} 
-        --html --output ${CMAKE_BINARY_DIR}/coverage_reports/coverage.html
+        --html --html-details -o ${CMAKE_BINARY_DIR}/coverage_reports/coverage.html
     COMMAND ${CMAKE_COMMAND} -E echo "Opening coverage report..."
     COMMAND cmd /C start "" "${CMAKE_BINARY_DIR}/coverage_reports/coverage.html"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
