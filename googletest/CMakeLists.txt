@@ -197,32 +197,13 @@ target_link_libraries(utest_svm_table gtest gtest_main)
 add_test(NAME utest_svm_table COMMAND utest_svm_table)
 
 
-# 添加代码覆盖率目标
-# find_program(GCOVR gcovr REQUIRED)
-# set(GCOVR_COMMAND ${GCOVR_EXECUTABLE})
+
+
 
 # # 创建 reports 文件夹
 # file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/reports)
 
-# if (GCOVR)
-#     execute_process(
-#         COMMAND ${CMAKE_COMMAND} -E echo "Cleaning *.gcno/*.gcda files"
-#         COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcda' -delete
-#         COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcno' -delete
-#     )
-#     message(STATUS "${GCOVR}")
-#     message(STATUS "${CMAKE_SOURCE_DIR}")
 
-#     add_custom_target(coverage
-#         COMMAND set -x
-#         COMMAND ${GCOVR} --root ${CMAKE_SOURCE_DIR}
-#             --html-details --html=${CMAKE_SOURCE_DIR}/reports/coverage.html
-#             --xml-pretty --xml=${CMAKE_SOURCE_DIR}/reports/coverage.xml
-#             --json -o ${CMAKE_SOURCE_DIR}/reports/coverage.json
-#         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-#         COMMENT "Generating code coverage report..."
-#     )
-# endif()
 
 # cxx_test(googletest-death-test-test gtest_main)
 # target_include_directories(RunTests PRIVATE

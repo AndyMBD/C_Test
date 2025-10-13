@@ -50,7 +50,33 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 
-# SET(GCC_COVERAGE_COMPILE_FLAGS "-g -O0 -coverage -fprofile-arcs -ftest-coverage")
-# SET(GCC_COVERAGE_LINK_FLAGS "-coverage -lgcov")
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-# SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
+
+# 添加代码覆盖率目标
+find_program(GCOVR gcovr REQUIRED)
+message (STATUS "GCOVR found: ${GCOVR}")
+# set(GCOVR_COMMAND ${GCOVR_EXECUTABLE})
+# message (STATUS "GCOVR_COMMAND: ${GCOVR_COMMAND}")
+if (GCOVR)
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -E echo "Cleaning *.gcno/*.gcda files"
+        COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcda' -delete
+        COMMAND find ${CMAKE_CURRENT_BINARY_DIR} -name '*.gcno' -delete
+    )
+    message(STATUS "${GCOVR}")
+    # same function as ctest -T coverage
+    # ninja coverage
+    add_custom_target(coverage
+        COMMAND ${CMAKE_CTEST_COMMAND} -T coverage
+        COMMENT "Running coverage analysis"
+    )
+
+    add_custom_target(coverage_report
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_reports
+    COMMAND ${GCOVR} --root ${CMAKE_SOURCE_DIR} 
+        --html --output ${CMAKE_BINARY_DIR}/coverage_reports/coverage.html
+    COMMAND ${CMAKE_COMMAND} -E echo "Opening coverage report..."
+    COMMAND cmd /C start "" "${CMAKE_BINARY_DIR}/coverage_reports/coverage.html"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Generating and opening HTML coverage report..."
+    )
+endif()
