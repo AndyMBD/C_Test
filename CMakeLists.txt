@@ -42,6 +42,7 @@ else()
 endif()
 enable_testing()
 
+# add_subdirectory( googletest )
 
 if (GCOVR_OPTION)
     find_program(GCOVR gcovr REQUIRED)
@@ -67,5 +68,12 @@ if (GCOVR_OPTION)
     COMMAND cmd /C start "" "${CMAKE_BINARY_DIR}/coverage_reports/coverage.html"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMENT "Generating and opening HTML coverage report..."
+    )
+
+    add_custom_target(coverage_report_clean
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage_reports/coverage.html
+    COMMAND ${CMAKE_COMMAND} -E echo "Coverage report file deleted: ${CMAKE_BINARY_DIR}/coverage_reports/coverage.html"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Cleaning up coverage report file..."
     )
 endif()
