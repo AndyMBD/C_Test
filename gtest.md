@@ -140,3 +140,31 @@ class VTK_PARALLEL_EXPORT vtkCompositer: public vtkObject
 　　跟com类似，导出类是一个派生类，派生自一个抽象类——都是纯虚函数。使用者需要知道这个抽象类的结构。DLL最少只需要提供一个用于获取类对象指针的接口。使用者跟DLL提供者共用一个抽象类的头文件，使用者依赖于DLL的东西很少，只需要知道抽象类的接口，以及获取对象指针的导出函数，对象内存空间的申请是在DLL模块中做的，释放也在DLL模块中完成,最后记得要调用释放对象的函数。
 
 这种方式通用，产生的DLL没有特定环境限制。借助了C++类的虚函数。一般都是采用这种方式。除了对DLL导出类有好处外，采用接口跟实现分离，可以使得工程的结构更清晰，使用者只需要知道接口，而不需要知道实现。
+```cmake
+   ctest -V
+   ctest -T coverage
+```
+
+# git clone this repository
+with vscode cmake configure and build
+```
+cd build
+# build cmake projects
+cmake ..             # Generate native build scripts for GoogleTest.
+# cmake clean with ninja
+ninja clean
+# cmake build with ninja
+ninja all
+#cTest with ninja
+ninja test
+ctest -V
+#cTest coverage with ninja
+ninja coverage
+ctest -T coverage
+#coverage report with ninja
+ninja coverage_report
+```
+## vscode Testing
+in vscode, you can use the `Testing` extension to run the tests.
+after run the tests, you can use the `Testing` extension to view the test results.
+ctrl+;+ctrl+o
