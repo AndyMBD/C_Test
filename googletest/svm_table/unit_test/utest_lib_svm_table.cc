@@ -4,7 +4,12 @@
 // #include <mlxunit.h>
 // #include <debug.h>
 // #include "config.h"
-#include "lib_svm_table.h"
+extern "C" {
+    #include "lib_svm_table.h"
+}
+// #include "lib_svm_table.h"
+
+
 
 // #include "cmocks_mock.h"
 

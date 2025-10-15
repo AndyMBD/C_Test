@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.13)
 project(gtest VERSION ${GOOGLETEST_VERSION} LANGUAGES CXX C)
 include(CTest)
 
-option(SAMPLE1_UNITTEST_OPTION "enable sample1_unittest." ON)
+option(SAMPLE1_UNITTEST_OPTION "enable sample1_unittest." OFF)
 option(SAMPLE2_UNITTEST_OPTION "enable sample2_unittest." OFF)
 option(SAMPLE3_UNITTEST_OPTION "enable sample3_unittest." OFF)
 option(SAMPLE4_UNITTEST_OPTION "enable sample4_unittest." OFF)
@@ -43,8 +43,16 @@ set(gtest_build_include_dirs
 # message(STATUS "gtest_SOURCE_DIR: ${gtest_SOURCE_DIR}")
 # message(STATUS "gtest_build_include_dirs: ${gtest_build_include_dirs}")
 # add_library(gtest_main STATIC src/gtest_main.cc)
-
+add_executable(gsl_main 
+              # ${gtest_SOURCE_DIR}/gsl/src/gsl_main.c
+              ${gtest_SOURCE_DIR}/gsl/src/gsl_main.c)
+target_include_directories(gsl_main PRIVATE ${gtest_build_include_dirs})
+target_link_libraries(gsl_main ${GSL_LIBRARIES})
+target_compile_options(gsl_main PRIVATE -coverage)
+target_link_options(gsl_main PRIVATE -coverage)
 # include(Dart)
+
+
 enable_testing()
 if(SAMPLE1_UNITTEST_OPTION)
   add_executable(sample1_unittest 
