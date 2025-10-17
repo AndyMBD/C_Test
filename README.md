@@ -38,11 +38,12 @@
 1. git clone this repository
 2. cd to the repository directory
 3. with vscode cmake configure and build
-4. under build folder
+5. under build folder
    ```
    cd build
    # build cmake projects
-   cmake ..             # Generate native build scripts for GoogleTest.
+   # This command can only use the CmakeCache.txt to configure the cmake
+   cmake ..             # Generate native build scripts for GoogleTest.  
    # cmake clean with ninja
    ninja clean
    # cmake build with ninja
@@ -56,7 +57,11 @@
    #coverage report with ninja
    ninja coverage_report
    ```
-5. vscode Testing
+6. when update cmakefilelist.txt, you need to reconfigure and build
+   - vscode ***ctrl+shift+p***
+   - vscode **cmake:Delete Cache and Reconfigure**
+
+
 in vscode, you can use the `Testing` extension to run the tests.
 after run the tests, you can use the `Testing` extension to view the test results.
 shortcut key: 

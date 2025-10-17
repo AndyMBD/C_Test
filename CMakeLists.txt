@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(googletest_Sample)
 set(GOOGLETEST_VERSION 1.16.0)
 
+include(${CMAKE_SOURCE_DIR}/misc/debugger_vsc.cmake)
 include(CTest)
 include(CMakeDependentOption)
 include(GNUInstallDirs)
