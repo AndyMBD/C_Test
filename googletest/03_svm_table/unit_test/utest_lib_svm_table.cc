@@ -17,7 +17,7 @@ extern "C" {
 
 static void lib_svm_table_test(unsigned int tst);
 
-#include "sample3-inl.h"
+// #include "sample3-inl.h"
 #include "gtest/gtest.h"
 namespace {
 /***** Test case setup and teardown ***********************************/
